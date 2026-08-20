@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love ❤️</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #cdb4e9 0%, #e7d6f7 50%, #f7efff 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 30px 0;
+        }
+
+        /* Floating Hearts */
+        .heart {
+            position: fixed;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 25px;
+            animation: float 6s linear infinite;
+            bottom: -50px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .heart:nth-child(1) {
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .heart:nth-child(2) {
+            left: 25%;
+            animation-delay: 2s;
+        }
+
+        .heart:nth-child(3) {
+            left: 45%;
+            animation-delay: 4s;
+        }
+
+        .heart:nth-child(4) {
+            left: 65%;
+            animation-delay: 1s;
+        }
+
+        .heart:nth-child(5) {
+            left: 85%;
+            animation-delay: 3s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Login */
+        .login-container {
+            position: relative;
+            z-index: 2;
+            width: 90%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 45px 30px;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(91, 58, 120, 0.18);
+        }
+
+        .heart-icon {
+            font-size: 65px;
+            animation: heartbeat 1.3s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.15);
+            }
+        }
+
+        .login-container h1 {
+            color: #4b3560;
+            font-size: 30px;
+            margin: 15px 0 8px;
+        }
+
+        .subtitle {
+            color: #5a466b;
+            opacity: 1;
+            margin-bottom: 25px;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            outline: none;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 20px;
+            letter-spacing: 8px;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        input::placeholder {
+            letter-spacing: normal;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 15px;
+            background: #b88add;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #9f70c8;
+            transform: scale(1.03);
+        }
+
+        #error {
+            color: #7a315f;
+            margin-top: 15px;
+            display: none;
+            font-weight: bold;
+        }
+
+        /* Love Page */
+        .love-page {
+            display: none;
+            position: relative;
+            z-index: 2;
+            width: 94%;
+            max-width: 800px;
+            text-align: center;
+            color: #4b3560;
+            animation: appear 1s ease;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .love-page .big-heart {
+            font-size: 100px;
+            animation: heartbeat 1.3s infinite;
+        }
+
+        .love-page h2 {
+            font-size: 45px;
+            margin: 15px 0;
+        }
+
+        /* Letter */
+        .letter {
+            position: relative;
+            background: #fcf8ff;
+            color: #4b3b59;
+            border-radius: 15px;
+            padding: 45px 50px;
+            margin: 30px auto 0;
+            text-align: left;
+            box-shadow:
+                0 20px 50px rgba(91, 58, 120, 0.22),
+                0 5px 15px rgba(0, 0, 0, 0.08);
+            max-width: 700px;
+        }
+
+        .letter::before {
+            content: "";
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 1px solid rgba(184, 138, 221, 0.3);
+            border-radius: 8px;
+            pointer-events: none;
+        }
+
+        .letter-top {
+            text-align: center;
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .letter h3 {
+            font-family: Georgia, serif;
+            font-size: 28px;
+            color: #9b6bc1;
+            margin-bottom: 25px;
+        }
+
+        .letter p {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 18px;
+            line-height: 1.9;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .letter-signature {
+            margin-top: 35px;
+            text-align: right;
+            font-family: Georgia, serif;
+        }
+
+        .letter-signature p {
+            margin-bottom: 5px;
+            text-align: right;
+            font-style: italic;
+        }
+
+        .letter-signature strong {
+            font-size: 22px;
+            color: #9b6bc1;
+        }
+
+        /* Relationship Timer */
+        .relationship-time {
+    margin: 35px auto 0;
+    padding: 30px 25px;
+    max-width: 700px;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow:
+        0 15px 35px rgba(100, 0, 30, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.relationship-time h3 {
+    font-size: 25px;
+    margin-bottom: 25px;
+    color: rgb(17, 2, 14);
+    font-weight: 600;
+}
+
+.timer-main {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 18px;
+}
+
+.timer-box {
+    background: rgba(255, 255, 255, 0.48);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 18px;
+    padding: 18px 10px;
+    transition: 0.3s ease;
+}
+
+.timer-box:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.62);
+}
+
+.timer-number {
+    display: block;
+    font-size: 32px;
+    font-weight: 700;
+    color: rgb(12, 6, 6);
+    line-height: 1.2;
+}
+
+.timer-label {
+    display: block;
+    margin-top: 5px;
+    font-size: 14px;
+    color: rgba(8, 5, 5, 0.9);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.timer-small {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    color: rgb(8, 1, 1);
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.timer-small span {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 8px 14px;
+    border-radius: 12px;
+}
+
+.timer-small strong {
+    font-size: 18px;
+}
+
+.timer-heart {
+    font-size: 18px;
+    margin-right: 5px;
+}
+
+@media (max-width: 600px) {
+    .relationship-time {
+        padding: 25px 15px;
+        margin-top: 25px;
+    }
+
+    .relationship-time h3 {
+        font-size: 21px;
+    }
+
+    .timer-main {
+        gap: 8px;
+    }
+
+    .timer-box {
+        padding: 15px 5px;
+        border-radius: 15px;
+    }
+
+    .timer-number {
+        font-size: 25px;
+    }
+
+    .timer-label {
+        font-size: 11px;
+    }
+
+    .timer-small {
+        gap: 7px;
+        font-size: 12px;
+    }
+
+    .timer-small span {
+        padding: 7px 8px;
+    }
+
+    .timer-small strong {
+        font-size: 14px;
+    }
+}
+
+        /* Mobile */
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 0;
+            }
+
+            .login-container {
+                padding: 35px 22px;
+            }
+
+            .love-page {
+                width: 94%;
+                padding: 20px 0;
+            }
+
+            .love-page .big-heart {
+                font-size: 70px;
+            }
+
+            .love-page h2 {
+                font-size: 32px;
+            }
+
+            .letter {
+                padding: 35px 25px;
+                margin-top: 20px;
+            }
+
+            .letter h3 {
+                font-size: 24px;
+            }
+
+            .letter p {
+                font-size: 16px;
+                line-height: 1.8;
+                text-align: left;
+            }
+
+            .letter-signature p {
+                text-align: right;
+            }
+
+            .relationship-time {
+                padding: 20px 15px;
+            }
+
+            #loveTimer {
+                font-size: 16px;
+            }
+
+            .forever {
+            color: #7b4fa3;
+                font-size: 21px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Floating Hearts -->
+    <div class="heart">❤️</div>
+    <div class="heart">💕</div>
+    <div class="heart">💗</div>
+    <div class="heart">💖</div>
+    <div class="heart">❤️</div>
+
+    <!-- LOGIN PAGE -->
+    <div class="login-container" id="loginPage">
+
+        <div class="heart-icon">❤️</div>
+
+        <h1>Something Special</h1>
+
+        <p class="subtitle">
+            This little secret is only for you 💕
+        </p>
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            maxlength="4"
+            inputmode="numeric"
+            onkeypress="checkEnter(event)"
+        >
+
+        <button onclick="login()">
+            Open My Heart 💗
+        </button>
+
+        <p id="error">
+            Wrong password... try again, my love 💔
+        </p>
+
+    </div>
+
+
+    <!-- LOVE PAGE -->
+    <div class="love-page" id="lovePage">
+
+        <div class="big-heart">❤️</div>
+
+        <h2>Welcome, My Love 💕</h2>
+
+
+        <!-- LOVE LETTER -->
+        <div class="letter">
+
+            <div class="letter-top">💌</div>
+
+            <h3>To My Baby Dani,</h3>
+
+            <p>
+                You found the secret! 🥰
+            </p>
+
+            <p>
+                I made this little page just for you because I wanted
+                to create something special that belongs only to us.
+                Even though our story is still beginning, every moment
+                with you already means so much to me. ❤️
+            </p>
+
+            <p>
+                You make my days brighter, my heart happier, and give me
+                another reason to smile. I may not always have the perfect
+                words to express how I feel, but I hope this little website
+                reminds you how special you are to me.
+            </p>
+
+            <p>
+                No matter how far apart we may be, please remember that
+                you will always have a special place in my heart. I am
+                excited for all the memories, adventures, laughs, and
+                moments that we will create together. 💕
+            </p>
+
+            <p>
+                This is only the beginning of our story, and I hope there
+                are many more chapters waiting for us.
+            </p>
+
+            <div class="letter-signature">
+                <p>With all my love,</p>
+                <strong>Your's Truly Zyren ❤️</strong>
+            </div>
+
+        </div>
+
+
+        <!-- RELATIONSHIP TIMER -->
+        <div class="relationship-time">
+
+    <h3>We've Been Together For 💕</h3>
+
+    <div class="timer-main">
+
+        <div class="timer-box">
+            <span class="timer-number" id="years">0</span>
+            <span class="timer-label">Years</span>
+        </div>
+
+        <div class="timer-box">
+            <span class="timer-number" id="months">0</span>
+            <span class="timer-label">Months</span>
+        </div>
+
+        <div class="timer-box">
+            <span class="timer-number" id="days">0</span>
+            <span class="timer-label">Days</span>
+        </div>
+
+    </div>
+
+    <div class="timer-small">
+
+        <span>
+            <span class="timer-heart">🥰</span>
+            <strong id="hours">0</strong> Hours
+        </span>
+
+        <span>
+            <span class="timer-heart">💕</span>
+            <strong id="minutes">0</strong> Minutes
+        </span>
+
+        <span>
+            <span class="timer-heart">💗</span>
+            <strong id="seconds">0</strong> Seconds
+        </span>
+
+    </div>
+
+</div>
+
+
+        <!-- DATE -->
+        <p class="date">
+            Our story started on<br>
+            <strong>July 14, 2026 • 9:36 PM</strong>
+        </p>
+
+        <p class="forever">
+            You + Me = Forever 💖
+        </p>
+
+    </div>
+
+
+    <script>
+
+        // =========================
+        // PASSWORD LOGIN
+        // =========================
+
+        function login() {
+
+            const password =
+                document.getElementById("password").value;
+
+            const error =
+                document.getElementById("error");
+
+            if (password === "1414") {
+
+                document.getElementById("loginPage").style.display = "none";
+
+                document.getElementById("lovePage").style.display = "block";
+
+                updateLoveTimer();
+
+            } else {
+
+                error.style.display = "block";
+
+                document.getElementById("password").value = "";
+
+            }
+        }
+
+
+        // Press ENTER to login
+        function checkEnter(event) {
+
+            if (event.key === "Enter") {
+                login();
+            }
+
+        }
+
+
+        // =========================
+        // RELATIONSHIP TIMER
+        // =========================
+
+      // =========================
+// RELATIONSHIP TIMER
+// =========================
+
+function updateLoveTimer() {
+
+    // Relationship started:
+    // July 14, 2026 at 9:36 PM
+    const startDate = new Date(2026, 6, 14, 21, 36, 0);
+    const now = new Date();
+
+    // Don't allow negative time
+    if (now < startDate) {
+        document.getElementById("years").textContent = "0";
+        document.getElementById("months").textContent = "0";
+        document.getElementById("days").textContent = "0";
+        document.getElementById("hours").textContent = "0";
+        document.getElementById("minutes").textContent = "0";
+        document.getElementById("seconds").textContent = "0";
+        return;
+    }
+
+    // Calculate complete years
+    let years = now.getFullYear() - startDate.getFullYear();
+
+    let anniversary = new Date(
+        startDate.getFullYear() + years,
+        startDate.getMonth(),
+        startDate.getDate(),
+        startDate.getHours(),
+        startDate.getMinutes(),
+        startDate.getSeconds()
+    );
+
+    if (anniversary > now) {
+        years--;
+        anniversary = new Date(
+            startDate.getFullYear() + years,
+            startDate.getMonth(),
+            startDate.getDate(),
+            startDate.getHours(),
+            startDate.getMinutes(),
+            startDate.getSeconds()
+        );
+    }
+
+    // Calculate complete months after the years
+    let months =
+        (now.getFullYear() - anniversary.getFullYear()) * 12 +
+        (now.getMonth() - anniversary.getMonth());
+
+    let monthDate = new Date(anniversary);
+
+    monthDate.setMonth(monthDate.getMonth() + months);
+
+    if (monthDate > now) {
+        months--;
+        monthDate = new Date(anniversary);
+        monthDate.setMonth(monthDate.getMonth() + months);
+    }
+
+    // Remaining time after years and months
+    let difference = now - monthDate;
+
+    const millisecondsInSecond = 1000;
+    const millisecondsInMinute = 60 * millisecondsInSecond;
+    const millisecondsInHour = 60 * millisecondsInMinute;
+    const millisecondsInDay = 24 * millisecondsInHour;
+
+    const days = Math.floor(
+        difference / millisecondsInDay
+    );
+
+    difference %= millisecondsInDay;
+
+    const hours = Math.floor(
+        difference / millisecondsInHour
+    );
+
+    difference %= millisecondsInHour;
+
+    const minutes = Math.floor(
+        difference / millisecondsInMinute
+    );
+
+    difference %= millisecondsInMinute;
+
+    const seconds = Math.floor(
+        difference / millisecondsInSecond
+    );
+
+    // Display the timer
+    document.getElementById("years").textContent = years;
+    document.getElementById("months").textContent = months;
+    document.getElementById("days").textContent = days;
+
+    document.getElementById("hours").textContent = hours;
+    document.getElementById("minutes").textContent = minutes;
+    document.getElementById("seconds").textContent = seconds;
+}
+
+// Update every second
+setInterval(updateLoveTimer, 1000);
+
+// Run immediately
+updateLoveTimer();
+
+    </script>
+
+</body>
+</html>
