@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I Love You in Every Language ❤️</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#030303;color:#ff3d52;font-family:Arial,Helvetica,sans-serif}
+body{min-height:100vh;overflow-x:hidden;padding:16px 10px 30px;display:flex;justify-content:center}
+main{width:min(100%,1000px);text-align:center;position:relative;z-index:1}
+.back{display:inline-block;margin:0 0 14px;padding:9px 16px;border:1px solid #ff4657;border-radius:24px;color:#ffc0c5;text-decoration:none;font-size:14px;box-shadow:0 0 10px #ff1d3828;transition:.25s}
+.back:hover{background:#26070b;box-shadow:0 0 20px #ff263b88}
+h1{font-size:clamp(21px,4vw,35px);letter-spacing:1.5px;margin:3px 0 5px;color:#ff4b5e;text-shadow:0 0 9px #ff1630,0 0 24px #a80017;animation:glow 2s ease-in-out infinite alternate}
+.subtitle{color:#d99ba2;font-size:13px;margin:0 0 4px}
+#heartCanvas{display:block;width:100%;height:auto;max-width:960px;margin:0 auto;filter:drop-shadow(0 0 8px #ff1734)}
+.caption{margin:0 auto;max-width:700px;color:#e5b4b9;line-height:1.6;font-size:14px}
+.caption strong{color:#ff6677}
+.spark{position:fixed;bottom:-35px;z-index:0;pointer-events:none;color:#ff263f;font-size:20px;animation:rise 7s linear infinite;text-shadow:0 0 12px #ff2338}
+.spark:nth-of-type(1){left:8%;animation-delay:0s}.spark:nth-of-type(2){left:25%;animation-delay:2.2s}.spark:nth-of-type(3){left:76%;animation-delay:1.3s}.spark:nth-of-type(4){left:92%;animation-delay:3.4s}
+@keyframes glow{from{text-shadow:0 0 8px #ff2635}to{text-shadow:0 0 20px #ff2635,0 0 36px #a80010}}
+@keyframes rise{0%{transform:translateY(0) rotate(0);opacity:0}15%{opacity:.75}100%{transform:translateY(-110vh) rotate(35deg);opacity:0}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="spark">♥</div><div class="spark">♥</div><div class="spark">♥</div><div class="spark">♥</div>
+<main>
+<a class="back" href="index.html">← Back to my love page</a>
+<h1>I LOVE YOU IN EVERY LANGUAGE</h1>
+<p class="subtitle">One heart, a thousand ways to say it ❤️</p>
+<canvas id="heartCanvas" width="1000" height="900" role="img" aria-label="A symmetrical glowing red heart filled with I love you in different languages"></canvas>
+<p class="caption">No matter the language, <strong>my heart says the same thing: I love you, Dani. ❤️</strong></p>
+</main>
+<script>
+(() => {
+ const canvas = document.getElementById('heartCanvas');
+ const ctx = canvas.getContext('2d');
+ const phrases = [
+  'Je t’aime','사랑해요','Ich liebe dich','Te amo','Ti amo','我愛你','愛してる','أحبك',
+  'Seni seviyorum','Miluji tě','Σ’ αγαπώ','Tôi yêu bạn','Volim te','사랑해','Ma armastan sind',
+  'Ik hou van je','Jeg elsker dig','Te quiero','Eu te amo','Kocham cię','أحبك','我爱你',
+  'Minä rakastan sinua','Szeretlek','Ti voglio bene','Kita cinta kamu','Jag älskar dig',
+  'Jeg elsker deg','Vos amo','Mahal kita','Obicham te','S’agapo','Te quiero','Ljubim te',
+  'Grá agam ort','Ana behibak','Phom rak khun','Ez t’estimat','Anh yêu em','Te dua',
+  'Aku cinta kamu','Wǒ ài nǐ','Ha’wa','Ngiyakuthanda','愛してるよ','Tamo','I love you'
+ ];
+ let progress = 0, raf = 0;
+
+ function heartPath(cx, cy, scale) {
+   ctx.beginPath();
+   for (let i=0; i<=360; i++) {
+     const t = i * Math.PI / 180;
+     const x = 16 * Math.pow(Math.sin(t), 3);
+     const y = 13*Math.cos(t) - 5*Math.cos(2*t) - 2*Math.cos(3*t) - Math.cos(4*t);
+     const px = cx + x*scale;
+     const py = cy - y*scale;
+     if (i===0) ctx.moveTo(px,py); else ctx.lineTo(px,py);
+   }
+   ctx.closePath();
+ }
+ function draw() {
+   const W=canvas.width,H=canvas.height;
+   ctx.clearRect(0,0,W,H);
+   const scale=24.5, cx=W/2, cy=H*0.48;
+   // Perfect mathematical heart silhouette and softly glowing outline.
+   heartPath(cx,cy,scale);
+   ctx.save();
+   ctx.shadowColor='#ff1638'; ctx.shadowBlur=24;
+   ctx.strokeStyle='#ff2946'; ctx.lineWidth=2.2; ctx.stroke();
+   ctx.restore();
+
+   // Clip all typography to the heart, so the letters themselves form its exact silhouette.
+   ctx.save();
+   heartPath(cx,cy,scale);
+   ctx.clip();
+   const rows = [];
+   for(let y=cy-13*scale; y<=cy+17*scale; y+=26) rows.push(y);
+   let phraseIndex=0;
+   rows.forEach((y,row) => {
+     // Each line spans the heart, with a small horizontal offset to feel like a typography poster.
+     const offset = row%2 ? -34 : 0;
+     for(let x=75+offset; x<W-55; x+=155) {
+       const p=phrases[phraseIndex%phrases.length];
+       const reveal=(row/rows.length)*0.68 + ((phraseIndex%4)*0.012);
+       if(progress>=reveal) {
+         const central = Math.abs(y-cy)<42 && Math.abs(x-cx)<220;
+         ctx.textAlign='center'; ctx.textBaseline='middle';
+         ctx.font=central ? 'italic bold 47px Georgia, serif' : `bold ${p.length>15?15:18}px Georgia, serif`;
+         ctx.fillStyle=central ? '#ff8c9a' : (phraseIndex%3===0?'#ff8290':'#ff4058');
+         ctx.shadowColor='#ff1937'; ctx.shadowBlur=central?22:10;
+         ctx.fillText(central?'I love you':p,x,y,148);
+       }
+       phraseIndex++;
+     }
+   });
+   // Draw the central phrase on top to ensure it reads clearly.
+   if(progress>0.35) {
+     ctx.textAlign='center';ctx.textBaseline='middle';
+     ctx.font='italic bold 64px Georgia, serif';
+     ctx.fillStyle='#ff9aa5';ctx.shadowColor='#ff1740';ctx.shadowBlur=28;
+     ctx.fillText('I love you',cx,cy+12,390);
+   }
+   ctx.restore();
+
+   // Tiny glowing dots around the boundary add the red neon-bead effect.
+   ctx.save();
+   ctx.shadowColor='#ff1937';ctx.shadowBlur=9;ctx.fillStyle='#ff7180';
+   for(let i=0;i<190;i++){
+     const t=i/190*Math.PI*2;
+     const x=16*Math.pow(Math.sin(t),3);
+     const y=13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t);
+     const pulse=1.2+(Math.sin(i*2.7+progress*7)+1)*0.75;
+     ctx.beginPath();ctx.arc(cx+x*scale,cy-y*scale,pulse,0,Math.PI*2);ctx.fill();
+   }
+   ctx.restore();
+   if(progress<1){progress=Math.min(1,progress+0.012);raf=requestAnimationFrame(draw);}
+ }
+ draw();
+ window.addEventListener('resize',()=>{cancelAnimationFrame(raf);progress=1;draw();});
+})();
+</script>
+</body>
+</html>
